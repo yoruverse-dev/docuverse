@@ -1,11 +1,58 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Input from "../components/Input.astro";
+import Heading from "../components/menu/Heading.astro";
+import Page from "../components/menu/Page.astro";
+import Layout from "../layouts/Layout.astro";
+import { CircleDashed, Search } from "lucide-react";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const example = [
+	{
+		container: "Advanced Guides",
+		pages: [
+			{
+				text: "Architecture",
+				href: "/advanced-guides/architecture",
+			},
+			{
+				text: "Plugins",
+				href: "/advanced-guides/plugins",
+				selected: true,
+			},
+			{
+				text: "Routing",
+				href: "/advanced-guides/routing",
+			},
+			{
+				text: "Static Site Generation",
+				href: "/advanced-guides/static-site-generation",
+			},
+			{
+				text: "Client Architecture",
+				href: "/advanced-guides/client-architecture",
+			},
+		],
+	},
+];
 ---
 
 <Layout>
-	<Welcome />
+	<main class="flex items-center justify-center w-full h-screen">
+		<div
+			class="max-w-72 w-full flex flex-col gap-5 p-5 h-screen overflow-auto border-r dark:border-zinc-700 border-zinc-200"
+		>
+			<Input type="search" placeholder="Search..." commandKey="K">
+				<Search slot="icon-left" />
+			</Input>
+			{
+				example.map(({ container, pages }) => (
+					<div>
+						<Heading text={container} />
+						{pages.map(({ text, href, selected }) => (
+							<Page text={text} href={href} selected={selected} />
+						))}
+					</div>
+				))
+			}
+		</div>
+	</main>
 </Layout>

@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+    --font-sans: 'Geist Variable', sans-serif;
+}
+
+@layer utilities {
+    .btn {
+        @apply hover:-translate-y-1 transition-all ease-in-out duration-200
+    }
+
+    .btn-brand-filled {
+        @apply dark:bg-indigo-400 bg-indigo-600 dark:text-zinc-950 text-white hover:bg-indigo-700 dark:hover:bg-indigo-300;
+    }
+
+    .btn-brand-outline {
+        @apply bg-transparent dark:text-indigo-400 text-indigo-600 hover:text-indigo-700 dark:hover:text-indigo-300 outline outline-indigo-600 hover:outline-indigo-700 dark:hover:outline-indigo-300 dark:outline-indigo-400;
+    }
+
+    .btn-brand-ghost {
+        @apply bg-transparent dark:text-indigo-400 text-indigo-600 hover:text-indigo-700 dark:hover:text-indigo-300;
+    }
+
+    .btn-primary {
+        @apply dark:bg-zinc-900 bg-zinc-100 dark:text-zinc-50 text-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800;
+    }
+
+    .btn-primary-outline {
+        @apply dark:bg-zinc-900 bg-zinc-100 dark:text-zinc-50 text-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 outline outline-zinc-200 dark:outline-zinc-700;
+    }
+
+    .btn-primary-ghost {
+        @apply bg-transparent dark:text-zinc-300 text-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-50;
+    }
+
+    .btn-danger-filled {
+        @apply dark:bg-red-400 bg-rose-600 dark:text-zinc-950 text-white hover:bg-red-500 dark:hover:bg-red-300;
+    }
+
+    .btn-danger-outline {
+        @apply bg-transparent dark:text-red-400 text-rose-600 hover:text-red-500 dark:hover:text-red-300 outline outline-red-600 hover:outline-red-700 dark:hover:outline-red-300 dark:outline-red-400;
+    }
+
+    .btn-danger-ghost {
+        @apply bg-transparent dark:text-red-400 text-rose-600 hover:text-red-500 dark:hover:text-red-300;
+    }
+
+    .kbd {
+        @apply flex items-center gap-1 shrink-0;
+        @apply rounded-md px-1.5 py-0.5;
+        @apply font-sans text-xs;
+        @apply bg-zinc-200 dark:bg-zinc-800 outline dark:outline-zinc-700 outline-zinc-300 text-zinc-900 dark:text-zinc-50;
+    }
+
+    .kbd-icon {
+        @apply size-3 text-zinc-500 dark:text-zinc-400
+    }
+
+    .input {
+        @apply flex items-center justify-between gap-2.5;
+        @apply rounded-xl h-9 px-5;
+        @apply bg-zinc-100 dark:bg-zinc-900 dark:focus-within:outline-indigo-400 focus-within:outline-indigo-600 outline outline-zinc-200 dark:outline-zinc-700 transition-colors ease-in-out duration-200;
+    }
+
+    .input-container {
+        @apply flex items-center gap-2.5 size-full
+    }
+
+    .input-icon {
+        @apply *:size-4 *:dark:text-zinc-50 *:text-zinc-900;
+    }
+
+    .input input {
+        @apply size-full focus:outline-none placeholder:text-zinc-500 dark:text-zinc-50 text-zinc-900
+    }
+}

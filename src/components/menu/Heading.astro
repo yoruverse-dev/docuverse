@@ -1,0 +1,11 @@
+---
+type Props = {
+    text: string;
+};
+
+const { text } = Astro.props;
+---
+
+<header class="flex items-center px-2.5 mb-2.5">
+    <h6 class="font-medium text-zinc-900 dark:text-zinc-50">{text}</h6>
+</header>

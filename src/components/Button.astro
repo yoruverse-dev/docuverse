@@ -1,0 +1,45 @@
+---
+type Props = {
+    color?: "brand" | "primary" | "danger";
+    variant?: "filled" | "outlined" | "ghost";
+    onlyIcon?: boolean;
+} & astroHTML.JSX.DefinedIntrinsicElements["button"];
+
+const {
+    color = "brand",
+    variant = "filled",
+    onlyIcon = false,
+    ...rest
+} = Astro.props;
+---
+
+<button
+    class:list={[
+        "btn flex items-center justify-center gap-2.5",
+        "h-9 rounded-xl font-medium text-sm cursor-pointer",
+        color === "brand" &&
+            (variant === "filled"
+                ? "btn-brand-filled"
+                : variant === "outlined"
+                  ? "btn-brand-outline"
+                  : variant === "ghost" && "btn-brand-ghost"),
+        color === "primary" &&
+            (variant === "filled"
+                ? "btn-primary"
+                : variant === "outlined"
+                  ? "btn-primary-outline"
+                  : variant === "ghost" && "btn-primary-ghost"),
+        color === "danger" &&
+            (variant === "filled"
+                ? "btn-danger-filled"
+                : variant === "outlined"
+                  ? "btn-danger-outline"
+                  : variant === "ghost" && "btn-danger-ghost"),
+        onlyIcon ? "w-9 px-0" : "px-5",
+    ]}
+    {...rest}
+>
+    <slot name="icon-left" />
+    <slot />
+    <slot name="icon-right" />
+</button>

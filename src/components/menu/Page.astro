@@ -1,0 +1,33 @@
+---
+type Props = {
+    text: string;
+    href: string;
+    selected?: boolean;
+};
+
+const { text, href, selected } = Astro.props;
+---
+
+<a
+    href={href}
+    class:list={[
+        "flex items-center gap-2.5 px-5",
+        "h-9 rounded-xl",
+        selected && "bg-zinc-100 dark:bg-zinc-800",
+    ]}
+>
+    {
+        selected && (
+            <span class="w-1 h-3.5 rounded dark:bg-indigo-400 bg-indigo-600" />
+        )
+    }
+    <span
+        class:list={[
+            "hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors",
+            selected
+                ? "text-zinc-900 dark:text-zinc-50"
+                : "text-zinc-700 dark:text-zinc-300",
+        ]}
+        >{text}
+    </span>
+</a>

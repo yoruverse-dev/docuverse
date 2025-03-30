@@ -1,0 +1,13 @@
+---
+type Props = {
+    key: string;
+};
+
+import { CommandIcon } from "lucide-react";
+const { key } = Astro.props;
+---
+
+<kbd class="kbd">
+    <CommandIcon className="kbd-icon" />
+    {key}
+</kbd>

@@ -1,0 +1,22 @@
+---
+import Command from "./Command.astro";
+
+type Props = {
+    commandKey?: string;
+} & astroHTML.JSX.DefinedIntrinsicElements["input"];
+
+const { commandKey, ...rest } = Astro.props;
+---
+
+<div class="input">
+    <div class="input-container">
+        <div class="input-icon">
+            <slot name="icon-left" />
+        </div>
+        <input {...rest} />
+        <div class="input-icon">
+            <slot name="icon-right" />
+        </div>
+    </div>
+    {commandKey && <Command key={commandKey} />}
+</div>

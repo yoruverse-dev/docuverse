@@ -1,0 +1,4 @@
+---
+title: Plugins
+slug: plugins
+---
