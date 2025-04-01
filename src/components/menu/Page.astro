@@ -9,7 +9,7 @@ const { text, href, selected } = Astro.props;
 ---
 
 <a
-    href={href}
+    href={`/docs${href}`}
     class:list={[
         "flex items-center gap-2.5 px-5",
         "h-9 rounded-xl",
@@ -18,7 +18,7 @@ const { text, href, selected } = Astro.props;
 >
     {
         selected && (
-            <span class="w-1 h-3.5 rounded dark:bg-indigo-400 bg-indigo-600" />
+            <span class='w-1 h-3.5 rounded dark:bg-indigo-400 bg-indigo-600' />
         )
     }
     <span

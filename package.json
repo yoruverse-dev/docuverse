@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/react": "^4.2.2",
     "@fontsource-variable/geist": "^5.2.5",
+    "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.0.17",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",

@@ -1,0 +1,85 @@
+---
+import { getCollection, render } from "astro:content";
+
+import Prose from "../../components/Prose.astro";
+import Layout from "../../layouts/Layout.astro";
+import Input from "../../components/Input.astro";
+import Heading from "../../components/menu/Heading.astro";
+import Page from "../../components/menu/Page.astro";
+
+import { Search } from "lucide-react";
+
+interface Collection {
+    name: string;
+    pages: {
+        text: string;
+        href: string;
+        selected: boolean;
+    }[];
+}
+
+export async function getStaticPaths() {
+    const docs = await getCollection("docs");
+
+    return docs.map((doc) => ({
+        params: {
+            slug: `/${doc.data.collection.slug}/${doc.data.slug}`,
+        },
+        props: { doc },
+    }));
+}
+
+const collections: Collection[] = [];
+const docs = await getCollection("docs");
+
+const { doc } = Astro.props;
+const { Content } = await render(doc);
+
+for (const collection of docs) {
+    const { collection: col, title, slug } = collection.data;
+
+    const { pages } = collections.find((c) => c.name === col.name) || {
+        name: col.name,
+        pages: [],
+    };
+
+    const selected =
+        doc.data.slug === slug && doc.data.collection.slug === col.slug;
+    const href = `/${col.slug}/${slug}`;
+    const text = title;
+
+    pages.push({ text, href, selected });
+
+    if (!collections.find((c) => c.name === col.name)) {
+        collections.push({ name: col.name, pages });
+    }
+}
+---
+
+<Layout>
+    <main class='flex justify-between w-full h-screen max-w-7xl mx-auto'>
+        <div
+            class='max-w-72 w-full flex flex-col gap-5 p-5 h-screen overflow-auto border-r dark:border-zinc-700 border-zinc-200'
+        >
+            <Input type='search' placeholder='Search...' commandKey='K'>
+                <Search slot='icon-left' />
+            </Input>
+            {
+                collections.map(({ name, pages }) => (
+                    <div>
+                        <Heading text={name} />
+                        {pages.map(({ text, href, selected }) => (
+                            <Page text={text} href={href} selected={selected} />
+                        ))}
+                    </div>
+                ))
+            }
+        </div>
+        <div class='w-full px-20 py-10'>
+            <Prose>
+                <Content />
+            </Prose>
+        </div>
+        <div></div>
+    </main>
+</Layout>
